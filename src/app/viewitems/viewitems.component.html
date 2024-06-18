@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Items Page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .button-spacing {
+      margin-right: 10px;
+    }
+    .center-content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 20px;
+    }
+    .table-container {
+      width: 100%;
+      max-width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <div class="center-content">
+    <div class="container table-container">
+      <h1 class="text-center">View All Items</h1>
+      <div class="mb-3">
+        <button type="button" class="btn btn-secondary button-spacing" (click)="onBack()">Back</button>
+      </div>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>OrderId</th>
+            <th>ItemId</th>
+            <th>Item Name</th>
+            <th>Item Price</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let n of OrderItemList">
+            <td>{{n.order.order_id}}</td>
+            <td>{{n.item.item_id}}</td>
+            <td>{{n.item.item_name}}</td>
+            <td>{{n.item.item_price}}</td>
+            <td>{{n.quantity}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

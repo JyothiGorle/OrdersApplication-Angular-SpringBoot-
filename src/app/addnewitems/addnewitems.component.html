@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add new items page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .button-spacing {
+      margin-right: 5px;
+    }
+    .error-message {
+      color: red;
+    }
+    .center-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+    }
+  </style>
+</head>
+<body>
+  <div class="center-content">
+    <div class="container">
+      <h1>Add new Item for OrderNo: {{orderid}}</h1>
+      <form [formGroup]="addItemForm" (ngSubmit)="fun('save')">
+        <div class="form-group">
+          <label for="item">Select an item:</label>
+          <select id="item" class="form-control" formControlName="item">
+            <option value="">Select items</option>
+            <option *ngFor="let i of items" [value]="i.item_id">{{i.item_name}} - {{i.item_price}}</option>
+          </select>
+          <div *ngIf="addItemForm.controls.item.errors && addItemForm.controls.item.touched" class="error-message">
+            Please select an item
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" class="form-control" formControlName="quantity" name="quantity">
+          <div *ngIf="addItemForm.controls.quantity.errors && addItemForm.controls.quantity.touched" class="error-message">
+            <div *ngIf="addItemForm.controls.quantity.errors.required">Please enter a quantity</div>
+            <div *ngIf="addItemForm.controls.quantity.errors.min">Quantity must be at least 1</div>
+            <div *ngIf="addItemForm.controls.quantity.errors.max">Quantity cannot exceed 1000</div>
+          </div>  
+        </div>
+        <button type="submit" name="action" value="save" class="btn btn-primary button-spacing">Save</button>
+        <button type="button" name="action" [routerLink]="['/edititems']" class="btn btn-secondary button-spacing">Cancel</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

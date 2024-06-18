@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Items Page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .button-spacing {
+      margin-right: 10px;
+    }
+    .center-content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 20px;
+    }
+    .table-container {
+      width: 100%;
+      max-width: 800px;
+    }
+  </style>
+</head>
+<body>
+  <div class="center-content">
+    <div class="container table-container">
+      <h1 class="text-center">The Items for that particular OrderNo: {{orderid}}</h1>
+      <div class="mb-3">
+        <!-- <button type="button" class="btn btn-primary button-spacing" [routerLink]="['/addnewitem', orderid]">Add Item</button> -->
+        <button type="button" class="btn btn-primary button-spacing" (click)="onAddItem()">Add Item</button>
+        <button type="button" class="btn btn-secondary" (click)="onBack()">Back</button>
+      </div>
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th>id</th>
+            <th>OrderId</th>
+            <th>ItemId</th>
+            <th>Item Name</th>
+            <th>Item Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let n of EditItemsList">
+            <td>{{n.id}}</td>
+            <td>{{n.order.order_id}}</td>
+            <td>{{n.item.item_id}}</td>
+            <td>{{n.item.item_name}}</td>
+            <td>{{n.item.item_price}}</td>
+            <td>{{n.quantity}}</td>
+            <td>{{n.quantity * n.item.item_price}}</td>
+            <td>
+              <button class="btn btn-success btn-sm button-spacing" [routerLink]="['/updateitem',n.id,n.order.order_id,n.item.item_id,n.item.item_name,n.quantity]">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteItems1(n.id,n.order.order_id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="text-center mt-3">
+        <p class="font-weight-bold">Total Cart Price: {{ totalcartprice }}</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

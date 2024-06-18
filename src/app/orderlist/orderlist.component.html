@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders jsp page</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .table-spacing {
+      margin-top: 20px; 
+    }
+    .button-spacing {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="btn btn-primary" (click)="addOrder()">Add Order</button> 
+    <table class="table table-bordered table-spacing">
+      <thead class="thead-dark">
+        <tr>
+          <th>OrderId</th>
+          <th>OrderDate</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let n of orders">
+          <td>{{n.order_id}}</td>
+          <td>{{n.order_date}}</td>
+          <td>
+            <!--<a class="btn btn-success button-spacing" [routerLink]="['/edititems',n.order_id]">Edit</a> -->
+             <a class="btn btn-success button-spacing" (click)="onEdit(n.order_id)">Edit</a> 
+            <button class="btn btn-danger button-spacing" (click)="deleteOrder(n.order_id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
